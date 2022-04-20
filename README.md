@@ -1,0 +1,1 @@
+check the README.md on frontend and backend folders respectively for instructions on how to start the server

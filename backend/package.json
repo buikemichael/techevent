@@ -12,6 +12,9 @@
     "build": "npm run clean && babel server -d dist --ignore dist",
     "dev": "nodemon index.js --exec babel-node"
   },
+  "babel":{
+    "presets": ["@babel/preset-env"]
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",

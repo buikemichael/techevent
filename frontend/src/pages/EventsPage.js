@@ -31,20 +31,18 @@ const EventsPage = () => {
     return (
       <div className='container'>
         {loading &&
-          <div className='alert alert-secondary text-center'>Loading events...</div>}
+          <div className='alert alert-secondary text-center mt-5'>Loading events...</div>}
         {error &&
-          <div className='alert alert-danger text-center'>Error getting data from server.</div>}
-        {!loading && !events?.length &&
-          <div className='text-center'>No Event found</div>
-        }
-        {!loading && events?.length &&
-          <div className='row'>
-            {events?.map((event) => (
-              <div className='col-md-4' key={event?._id}>
-                <Event eventData={event} />
-              </div>
-            ))}
-          </div>
+          <div className='alert alert-danger text-center mt-5'>Error getting data from server.</div>}
+        {!loading && !events?.length ?
+          <div className='alert alert-danger text-center mt-5'>No Event found</div>
+          :<div className='row'>
+          {events?.map((event) => (
+            <div className='col-md-4' key={event?._id}>
+              <Event eventData={event} />
+            </div>
+          ))}
+        </div>
         }
       </div>)
   }

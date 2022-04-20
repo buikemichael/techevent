@@ -15,8 +15,8 @@ export const getEvents = async (query) => {
     if (search) {
       joinQuery.push({
         $or: [
-          { title: { $regex: '.*' + search.trim() + '.*', $options: 'i' } },
-          { address: { $regex: '.*' + search.trim() + '.*', $options: 'i' } },
+          { title: { $regex: `.*${search.trim()}.*`, $options: 'i' } },
+          { address: { $regex: `.*${search.trim()}.*`, $options: 'i' } },
         ],
       });
     }

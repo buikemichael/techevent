@@ -91,9 +91,9 @@ const EventsPage = () => {
           </form>
         </div>
       </Header>
-      <EventsWrapper>
+      <div>
         <Events />
-      </EventsWrapper>
+      </div>
     </div>
   );
 }
@@ -173,5 +173,4 @@ const Header = styled.div`
   }
 `;
 
-const EventsWrapper = styled.div``;
 export default EventsPage;

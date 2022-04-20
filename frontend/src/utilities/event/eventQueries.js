@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const EVENTS_URL = `${process.env.REACT_APP_API_URL}/events`;
-
 const fetchAllEvents = async (query) => {
   const { search, category, isVirtual } = query;
   let queryString = '';
@@ -14,8 +12,8 @@ const fetchAllEvents = async (query) => {
   if (isVirtual) {
     queryString += `&isVirtual=${isVirtual}`;
   }
-  const response = await axios.get(`${EVENTS_URL}?query=true${queryString}`);
-  return response.data;
+  const result = await axios.get(`${process.env.REACT_APP_API_URL}/events?query=true${queryString}`);
+  return result.data;
 };
 
 const eventQueries = { fetchAllEvents };

@@ -7,7 +7,7 @@ const initialState = {
   loading: false,
 };
 
-export const fetchAllEvents = createAsyncThunk(
+export const getEvents = createAsyncThunk(
   '/events',
   async (query, thunkAPI) => {
     try {
@@ -30,14 +30,14 @@ export const eventSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllEvents.pending, (state) => {
+      .addCase(getEvents.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchAllEvents.fulfilled, (state, action) => {
+      .addCase(getEvents.fulfilled, (state, action) => {
         state.loading = false;
         state.events = action.payload.events;
       })
-      .addCase(fetchAllEvents.rejected, (state, action) => {
+      .addCase(getEvents.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.events = null;
@@ -45,5 +45,4 @@ export const eventSlice = createSlice({
   },
 });
 
-export const { reset } = eventSlice.actions;
 export default eventSlice.reducer;

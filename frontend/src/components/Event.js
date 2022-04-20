@@ -113,7 +113,6 @@ const EventHolder = styled.div`
         span{
           font-weight: 700;
           font-size: 15px;
-          text-decoration: underline;
           color:#ce1446;
         }
       }

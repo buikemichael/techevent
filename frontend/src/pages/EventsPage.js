@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Event from '../components/Event';
-import { fetchAllEvents } from '../utilities/event/eventSlice';
+import { getEvents } from '../utilities/event/eventSlice';
 
 const EventsPage = () => {
   const dispatch = useDispatch();
@@ -13,23 +13,40 @@ const EventsPage = () => {
   const { events, loading, error } = useSelector((state) => state.event);
 
 
-  const fetchData = useCallback(() => {
+  const getEventData = useCallback(() => {
     dispatch(
-      fetchAllEvents({
+      getEvents({
         category,
         isVirtual,
         search,
       })
     );
-  }, [category, dispatch, isVirtual, search]);
+  }, [dispatch, isVirtual, search, category]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    getEventData();
+  }, [getEventData]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    fetchData()
+  const Events = () => {
+    return (
+      <div className='container'>
+        {loading &&
+          <div className='alert alert-secondary text-center'>Loading events...</div>}
+        {error &&
+          <div className='alert alert-danger text-center'>Error getting data from server.</div>}
+        {!loading && !events?.length &&
+          <div className='text-center'>No Event found</div>
+        }
+        {!loading && events?.length &&
+          <div className='row'>
+            {events?.map((event) => (
+              <div className='col-md-4' key={event?._id}>
+                <Event eventData={event} />
+              </div>
+            ))}
+          </div>
+        }
+      </div>)
   }
   return (
     <div className=''>
@@ -38,7 +55,7 @@ const EventsPage = () => {
           TECH EVENT UK
         </div>
         <div className="container main-searchbar-area">
-          <form className="searchbar-wrapper" onSubmit={handleSubmit} >
+          <form className="searchbar-wrapper" >
             <div className="row">
               <div className="col-lg-12">
                 <div className="row">
@@ -77,27 +94,7 @@ const EventsPage = () => {
         </div>
       </Header>
       <EventsWrapper>
-        <div className='container'>
-          {!loading ? (
-            !error ? (
-              events?.length > 0 ? (
-                <div className='row'>
-                  {events?.map((event) => (
-                    <div className='col-md-4' key={event?._id}>
-                      <Event eventData={event} />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className='text-center'>No data to show</div>
-              )
-            ) : (
-              <div className='text-center'>Something went wrong.</div>
-            )
-          ) : (
-            <div className='text-center'>Loading...</div>
-          )}
-        </div>
+        <Events />
       </EventsWrapper>
     </div>
   );

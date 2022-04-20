@@ -1,5 +1,6 @@
 this project is built with nodeJS, ExpressJS, MongoDB, Mongoose and complied with bable.
 
+- Root : `/api`
 - Get events: `GET /api/events`
 
 ## Requirement
